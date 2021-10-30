@@ -1,5 +1,5 @@
 Analysis & Synthesis report for main
-Thu Oct 28 23:58:52 2021
+Sat Oct 30 13:27:01 2021
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -14,9 +14,10 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  9. Parameter Settings for User Entity Instance: Top-level Entity: |main
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -42,7 +43,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 28 23:58:52 2021       ;
+; Analysis & Synthesis Status     ; Successful - Sat Oct 30 13:27:01 2021       ;
 ; Quartus Prime Version           ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                   ; main                                        ;
 ; Top-level Entity Name           ; main                                        ;
@@ -226,6 +227,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
++----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |main ;
++-----------------+-------+--------------------------------------------+
+; Parameter Name  ; Value ; Type                                       ;
++-----------------+-------+--------------------------------------------+
+; NUM_PASSWORDS   ; 4     ; Signed Integer                             ;
+; PASSWORD_LENGTH ; 5     ; Signed Integer                             ;
++-----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-------------------+---------------------------------+
@@ -253,12 +265,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Oct 28 23:58:41 2021
+    Info: Processing started: Sat Oct 30 13:26:51 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off main -c main
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file main.v
     Info (12023): Found entity 1: main File: C:/intelFPGA_Lite/18.0/ECE2220Labs/Final Project/Codebase/main.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bianarytobcd.v
+    Info (12023): Found entity 1: bianaryToBCD File: C:/intelFPGA_Lite/18.0/ECE2220Labs/Final Project/Codebase/bianaryToBCD.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcdtohex.v
+    Info (12023): Found entity 1: BCDToHex File: C:/intelFPGA_Lite/18.0/ECE2220Labs/Final Project/Codebase/BCDToHex.v Line: 1
 Info (12127): Elaborating entity "main" for the top level hierarchy
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -266,9 +282,9 @@ Info (21057): Implemented 2 device resources after synthesis - the final resourc
     Info (21058): Implemented 1 input pins
     Info (21059): Implemented 1 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4795 megabytes
-    Info: Processing ended: Thu Oct 28 23:58:52 2021
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:25
+    Info: Peak virtual memory: 4793 megabytes
+    Info: Processing ended: Sat Oct 30 13:27:01 2021
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:24
 
 

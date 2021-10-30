@@ -3,5 +3,5 @@ module main(
 	output sampleOutput);
 	
 	assign sampleOutput = sampleInput;
-	
+
 endmodule
