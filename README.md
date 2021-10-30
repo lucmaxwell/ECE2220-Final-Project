@@ -17,5 +17,3 @@ The project is written for a DE10-Standard Intel FPGA board. It was created usin
 ## License
 
 MIT License
-
-This is from folder 1
