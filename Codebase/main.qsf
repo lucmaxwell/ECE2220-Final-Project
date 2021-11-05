@@ -46,12 +46,9 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
-set_global_assignment -name VERILOG_FILE main.v
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_AB30 -to sampleInput
-set_location_assignment PIN_AA24 -to sampleOutput
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
 set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
@@ -64,6 +61,35 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
 set_global_assignment -name ACTIVE_SERIAL_CLOCK FREQ_100MHZ
+set_global_assignment -name VERILOG_FILE clkmodule.v
+set_global_assignment -name VERILOG_FILE main.v
 set_global_assignment -name VERILOG_FILE bianaryToBCD.v
 set_global_assignment -name VERILOG_FILE BCDToHex.v
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_location_assignment PIN_AB30 -to switch[0]
+set_location_assignment PIN_Y27 -to switch[1]
+set_location_assignment PIN_AB28 -to switch[2]
+set_location_assignment PIN_AC30 -to switch[3]
+set_location_assignment PIN_W25 -to switch[4]
+set_location_assignment PIN_V25 -to switch[5]
+set_location_assignment PIN_AC28 -to switch[6]
+set_location_assignment PIN_AD30 -to switch[7]
+set_location_assignment PIN_AC29 -to switch[8]
+set_location_assignment PIN_AA30 -to switch[9]
+set_location_assignment PIN_AA15 -to tryPassword
+set_location_assignment PIN_AC22 -to switchLED[9]
+set_location_assignment PIN_AA24 -to switchLED[0]
+set_location_assignment PIN_AB23 -to switchLED[1]
+set_location_assignment PIN_AC23 -to switchLED[2]
+set_location_assignment PIN_AD24 -to switchLED[3]
+set_location_assignment PIN_AG25 -to switchLED[4]
+set_location_assignment PIN_AF25 -to switchLED[5]
+set_location_assignment PIN_AE24 -to switchLED[6]
+set_location_assignment PIN_AF24 -to switchLED[7]
+set_location_assignment PIN_AB22 -to switchLED[8]
+set_location_assignment PIN_AK4 -to removePassword
+set_location_assignment PIN_W17 -to passwordCheck
+set_location_assignment PIN_AA14 -to addPassword
+set_location_assignment PIN_AF16 -to passwordCheck2
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
