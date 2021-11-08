@@ -1,0 +1,8 @@
+module displaymodule(bits, sevseg)
+
+	reg [0:48] bits;
+	output reg [7:0] sevseg0,sevseg1,sevseg2,sevseg3,sevseg4,sevseg5,sevseg6;
+	
+	wire flagbit = bits[0];
+	
+	
