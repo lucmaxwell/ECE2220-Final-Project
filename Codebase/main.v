@@ -1,6 +1,7 @@
 module main(
 	input [9:0] switch,
 	input tryPassword, addPassword, removePassword,
+	input PS2_Data, PS2_Clock,
 	output reg [9:0] switchLED,
 	output reg passwordCheck
 	);
