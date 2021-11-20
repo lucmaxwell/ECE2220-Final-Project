@@ -2,7 +2,7 @@ module main(
 	input tryPassword, addPassword,
 	input PS2_Data, PS2_Clock,
 	
-	output reg [7:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5, sevenSeg6, sevenSeg7
+	output [7:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5
 	);
 	
 	
@@ -36,7 +36,7 @@ module main(
 	
 	// Keyboard and display modules
 	keyboard ke(PS2_Clock, PS2_Data, fromKeyboard);
-	displayModule display(toDisplay, sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5, sevenSeg6, sevenSeg7);
+	displaymodule display(toDisplay, sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5);
 		
 		
 	// Always statements
@@ -56,8 +56,7 @@ module main(
 	always @(negedge addPassword) begin
 		passwords[currPasswordIndex] = currentPassword;
 		currPasswordIndex = (currPasswordIndex + 1) % NUM_PASSWORDS;
-		newPassword = 1;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		updateDisplay();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		newPassword = 1; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	end
 
 	// Try password
