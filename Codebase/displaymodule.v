@@ -1,7 +1,7 @@
 module displaymodule(bits, sevseg0, sevseg1, sevseg2, sevseg3, sevseg4, sevseg5);
 
 	input [0:47] bits;
-	output wire	[7:0] sevseg0, sevseg1, sevseg2, sevseg3, sevseg4, sevseg5;
+	output wire	[6:0] sevseg0, sevseg1, sevseg2, sevseg3, sevseg4, sevseg5;
 	
 	//letter to HEX
 	lettertohex Lhex0 (bits[0:7], sevseg0);

@@ -2,7 +2,7 @@ module main(
 	input tryPassword, addPassword,
 	input PS2_Data, PS2_Clock,
 	
-	output [7:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5
+	output [6:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5
 	);
 	
 	
