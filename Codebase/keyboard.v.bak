@@ -51,8 +51,6 @@ module keyboard( clk, data, outputBinData);
 	begin	
 	if(bitInfo == 8'hf0) // f0 is the stop code for when the key is released
 		outputBinData <= storage;
-		//outputBinData = storage;
-		//storage = 8'hf0
 	else//stores the value of the key pressed as long as its not the release code
 		storage <= bitInfo;	
 	end

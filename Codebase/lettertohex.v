@@ -29,7 +29,7 @@ module lettertohex(flagbit, sevbits, sevseg);
        sevseg = 7'b0001011;
    else if(sevbits == 7'b1001011 & flagbit == 1) //4B - L
        sevseg = 7'b1000111;
-   else if(sevbits == 7'b0111010 & flagbit == 1)  //3A - M
+   else if(sevbits == 7'b0111010 & flagbit == 1) //3A - M
        sevseg = 7'b0010101;
    else if(sevbits == 7'b0110001 & flagbit == 1) //31 - N
        sevseg = 7'b1101010;
@@ -77,7 +77,9 @@ module lettertohex(flagbit, sevbits, sevseg);
    else if(sevbits == 7'b1000110 & flagbit == 1) //1A - Z
        sevseg = 7'b0010000;//9
    else if(sevbits == 7'b1000101 & flagbit == 1) //1A - Z
-       sevseg = 7'b1000000;//0	 
+       sevseg = 7'b1000000;//0	
+	else if(sevbits == 7'b1111111 & flagbit == 1)
+		 sevseg = 7'b1111111; // Display nothing. Do not delete :)
 		 
 	end
 	

@@ -1,11 +1,8 @@
 module main(
-	input [9:0] switch,
-	input tryPassword, addPassword, removePassword,
-	
+	input tryPassword, addPassword,
 	input PS2_Data, PS2_Clock,
-	output reg [9:0] switchLED,
-	output reg passwordCheck,
-	output reg [7:0] sevenSeg [5:0]
+	
+	output reg [7:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5, sevenSeg6, sevenSeg7
 	);
 	
 	
@@ -13,109 +10,72 @@ module main(
 	parameter NUM_PASSWORDS = 2;
 	
 	// Internal
-	reg [9:0] passwords [0:NUM_PASSWORDS - 1];
 	integer currPasswordIndex;
 	integer k;
-	reg [7:0] fromKeyboard;
-	reg useKeyboard;
-	reg [48:0] toDisplay;
 	
-
+	reg [47:0] passwords [0:NUM_PASSWORDS - 1];
+	
+	reg [47:0] currentPassword;
+	
+	wire [7:0] fromKeyboard;
+	
+	reg [47:0] toDisplay;
+	
+	reg newPassword;
+	
 	
 	// Initial block
 	initial begin
-		passwordCheck = 1;
 		currPasswordIndex = 0;
-		useKeyboard = 1;
+		newPassword = 1;
 
 		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
-			passwords[k] = 10'b0000000000;
+			passwords[k] = 11'b00000000000;
 		end
 	end
 	
 	// Keyboard and display modules
-	keyboard k(PS2_Clock, PS2_Data, fromKeyboard);
-	displayModule display(toDisplay, sevenSeg[0], sevenSeg[1], sevenSeg[2], sevenSeg[3], sevenSeg[4], sevenSeg[5], sevenSeg[6], sevenSeg[7])
-	
-	
+	keyboard ke(PS2_Clock, PS2_Data, fromKeyboard);
+	displayModule display(toDisplay, sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5, sevenSeg6, sevenSeg7);
+		
+		
 	// Always statements
 	always @(fromKeyboard) begin
-		if (useKeyboard) begin
-			toDisplay << 8;
-			toDisplay[7:0] = fromKeyboard;
-			toDisplay[48] = 1;
+		if (!newPassword) begin
+			currentPassword = currentPassword << 8;
+			currentPassword[7:0] = fromKeyboard;
+		end
+		else begin
+			currentPassword = {48{1'b1}};
+			currentPassword[7:0] = fromKeyboard;
+			toDisplay = currentPassword; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		end
 	end
-	
-	
-	// Switch LEDs
-	always @(switch) 
-		switchLED = switch;
-
 
 	// Add password
 	always @(negedge addPassword) begin
-		if (!useKeyboard) begin
-			passwords[currPasswordIndex] = switch;
-			currPasswordIndex = (currPasswordIndex + 1) % NUM_PASSWORDS;
-		else begin
-		
-		end
-			
+		passwords[currPasswordIndex] = currentPassword;
+		currPasswordIndex = (currPasswordIndex + 1) % NUM_PASSWORDS;
+		newPassword = 1;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		updateDisplay();//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	end
 
 	// Try password
 	always @(negedge tryPassword) begin
-		if (!useKeyboard) begin
-			reg isValidPassword;
-			
-			isValidPassword = 0; // Not valid password until proven to be.
-			for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
-				if (passwords[k] == switch) begin
-					isValidPassword = 1;
-				end
-			end
-			
-			passwordCheck = isValidPassword;
-		end
-		
-		else begin
-			
-		end
-	end
-	
-	
-	always @(negedge switchInputType) begin
-		useKeyboard = ~useKeyboard
-		toDisplay = {}
-	end
-	
-/*
-	// Remove password
-	always @(negedge removePassword) begin
-		reg otherPassword = 10'b0000000000;
-		integer targetPasswordIndex = -1;
+		reg isValidPassword = 0; // Not valid password until proven to be.
 		
 		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
-		
-			// Find a non-default password if it exists
-			if (passwords[k] != otherPassword) begin
-				otherPassword = passwords[k];
+			if (passwords[k] == currentPassword) begin
+				isValidPassword = 1;
 			end
-			
-			// Find the index of the password to be deleted
-			if (passwords[k] == switch) begin
-				targetPasswordIndex = k;
-			end
-			
-		end
-		
-		// If the password to be deleted was found, delete it
-		if (targetPasswordIndex != -1) begin
-			passwords[targetPasswordIndex] = otherPassword;
 		end
 		
 	end
-*/
+	
+	
+	// Tasks
+	task updateDisplay();
+		toDisplay = currentPassword;
+	endtask
 
 endmodule
