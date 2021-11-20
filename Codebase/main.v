@@ -14,13 +14,12 @@ module main(
 	integer k;
 	
 	reg [47:0] passwords [0:NUM_PASSWORDS - 1];
-	
 	reg [47:0] currentPassword;
 	
 	wire [7:0] fromKeyboard;
 	
 	reg [47:0] toDisplay;
-	
+
 	reg newPassword;
 	
 	
@@ -44,11 +43,12 @@ module main(
 		if (!newPassword) begin
 			currentPassword = currentPassword << 8;
 			currentPassword[7:0] = fromKeyboard;
+			toDisplay = currentPassword;
 		end
 		else begin
 			currentPassword = {48{1'b1}};
 			currentPassword[7:0] = fromKeyboard;
-			toDisplay = currentPassword; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			toDisplay = currentPassword;
 		end
 	end
 
@@ -56,7 +56,7 @@ module main(
 	always @(negedge addPassword) begin
 		passwords[currPasswordIndex] = currentPassword;
 		currPasswordIndex = (currPasswordIndex + 1) % NUM_PASSWORDS;
-		newPassword = 1; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		newPassword = 1;
 	end
 
 	// Try password
@@ -70,11 +70,5 @@ module main(
 		end
 		
 	end
-	
-	
-	// Tasks
-	task updateDisplay();
-		toDisplay = currentPassword;
-	endtask
 
 endmodule
