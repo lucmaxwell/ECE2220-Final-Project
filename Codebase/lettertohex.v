@@ -57,6 +57,28 @@ module lettertohex(flagbit, sevbits, sevseg);
        sevseg = 7'b1000100;
    else if(sevbits == 7'b0011010 & flagbit == 1) //1A - Z
        sevseg = 7'b0010010;
+		 // Numbers
+   else if(sevbits == 7'b0010110 & flagbit == 1) //1A - Z
+       sevseg = 7'b1111001;//1
+   else if(sevbits == 7'b0011110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0100100;//2
+   else if(sevbits == 7'b0100110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0110000;//3
+   else if(sevbits == 7'b0100101 & flagbit == 1) //1A - Z
+       sevseg = 7'b0011001;//4
+   else if(sevbits == 7'b0101110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0010010;//5
+   else if(sevbits == 7'b0110110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0000010;//6
+   else if(sevbits == 7'b0111101 & flagbit == 1) //1A - Z
+       sevseg = 7'b1111000;//7
+   else if(sevbits == 7'b0111110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0000000;//8
+   else if(sevbits == 7'b1000110 & flagbit == 1) //1A - Z
+       sevseg = 7'b0010000;//9
+   else if(sevbits == 7'b1000101 & flagbit == 1) //1A - Z
+       sevseg = 7'b1000000;//0	 
+		 
 	end
 	
 endmodule
