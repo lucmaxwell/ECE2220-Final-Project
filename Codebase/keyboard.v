@@ -3,6 +3,7 @@ module keyboard( clk, data, outputBinData);
 	//a case statement is needed to sync the the input clock with the input pin, on each negedge of the clock the corresponding bit is loaded into the proper place.
 	//bits 10 and 11 are used to compare the stored data to see if it is the released code, if its not it is stored for later use.
 	//the bits are only outputted from the module when the released code is sent to the module.
+	//The module constantly outputs the stopcode until the key is released, then it sends one instance of the keycode, then resets the module back to the stopcode.
 	input wire data;
 	input wire clk;
 	output reg[7:0] outputBinData;
@@ -49,10 +50,12 @@ module keyboard( clk, data, outputBinData);
 	always@(posedge endSwitch)
 	//stores the binary data of the key then only releases it as soon as the released code is inputted
 	begin	
-	if(bitInfo == 8'hf0) // f0 is the stop code for when the key is released
-		outputBinData <= storage;
-		//outputBinData = storage;
-		//storage = 8'hf0
+	if(bitInfo == 8'hf0) // f0 is the stop code for when the key is released\
+		begin
+		outputBinData = storage;
+		//outputBinData = 8'hf0;
+		storage = 8'hf0;
+		end
 	else//stores the value of the key pressed as long as its not the release code
 		storage <= bitInfo;	
 	end
