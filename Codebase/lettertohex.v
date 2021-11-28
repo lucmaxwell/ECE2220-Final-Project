@@ -78,10 +78,8 @@ module lettertohex(sevbits, sevseg);
        sevseg = 7'b0010000;//9
    else if(sevbits == 8'b01000101)
        sevseg = 7'b1000000;//0	
-	else if(sevbits == 8'b11111111)
-		 sevseg = 7'b1111111; // Display nothing. Do not delete :) 
-	else if(sevbits == 8'b00000000)
-		 sevseg = 7'b0000000;
+	else
+		 sevseg = 7'b1111111; // Spacae (catch all)
 	end
 	
 
