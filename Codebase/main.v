@@ -1,8 +1,9 @@
 module main(
 	input tryPassword, addPassword,
-	input PS2_Data, PS2_Clock, switch,
+	input PS2_Data, PS2_Clock, addLetter,
 	
-	output [6:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5
+	output [6:0] sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5, 
+	output reg isValidPassword
 	);
 	
 	// Parameters
@@ -28,9 +29,10 @@ module main(
 		newPassword = 1;
 		currentPassword = {48{1'b1}};
 		toDisplay = {48{1'b1}};
+		isValidPassword = 1;
 
 		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
-			passwords[k] = {48{1'b0}};
+			passwords[k] = {6{8'b01000101}};
 		end
 	end
 	
@@ -39,7 +41,7 @@ module main(
 	displaymodule display(toDisplay, sevenSeg0, sevenSeg1, sevenSeg2, sevenSeg3, sevenSeg4, sevenSeg5);
 		
 	// Always statements
-	always @(negedge switch) begin
+	always @(negedge addLetter) begin
 		if (!newPassword) begin
 			currentPassword = currentPassword >> 8;
 			currentPassword[0:7] = fromKeyboard;
@@ -52,7 +54,7 @@ module main(
 			newPassword = 0;
 		end
 	end
-//
+
 //	// Add password
 //	always @(negedge addPassword) begin
 //		passwords[currPasswordIndex] = currentPassword;
@@ -60,16 +62,16 @@ module main(
 //		newPassword = 1;
 //	end
 //
-//	// Try password
-//	always @(negedge tryPassword) begin
-//		reg isValidPassword = 0; // Not valid password until proven to be.
+	// Try password
+	always @(negedge tryPassword) begin
+		isValidPassword = 0; // Not valid password until proven to be.
 //		
-//		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
-//			if (passwords[k] == currentPassword) begin
-//				isValidPassword = 1;
-//			end
-//		end
-//		
-//	end
+		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
+			if (passwords[k] == currentPassword) begin
+				isValidPassword = 1;
+			end
+		end
+		
+	end
 
 endmodule
