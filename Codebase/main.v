@@ -27,6 +27,7 @@ module main(
 		currPasswordIndex = 0;
 		newPassword = 1;
 		currentPassword = {48{1'b1}};
+		toDisplay = {48{1'b1}};
 
 		for (k = 0; k < NUM_PASSWORDS; k = k + 1) begin
 			passwords[k] = {48{1'b0}};
@@ -39,17 +40,17 @@ module main(
 		
 	// Always statements
 	always @(negedge switch) begin
-//		if (!newPassword) begin
+		if (!newPassword) begin
 			currentPassword = currentPassword >> 8;
 			currentPassword[0:7] = fromKeyboard;
 			toDisplay = currentPassword;
+		end
+		else begin
+			currentPassword = {48{1'b1}};
+			currentPassword[0:7] = fromKeyboard;
+			toDisplay = currentPassword;
 			newPassword = 0;
-//		end
-//		else begin
-//			currentPassword = {48{1'b1}};
-//			currentPassword[7:0] = fromKeyboard;
-//			toDisplay = currentPassword;
-//		end
+		end
 	end
 //
 //	// Add password
