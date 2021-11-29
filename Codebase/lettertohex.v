@@ -79,7 +79,7 @@ module lettertohex(sevbits, sevseg);
    else if(sevbits == 8'b01000101)
        sevseg = 7'b1000000;//0	
 	else
-		 sevseg = 7'b1111111; // Spacae (catch all)
+		 sevseg = 7'b1111111; // Space (catch all)
 	end
 	
 
